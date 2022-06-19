@@ -1,0 +1,149 @@
+{% extends 'base/base.html' %}
+
+{% block body %}
+<style type="text/css">
+.container {
+		width: 100%;
+		max-width: 390px;
+		height: max-content;
+		min-height: 440px;
+		margin: 0 auto;
+		box-shadow: 0px 10px 30px rgb(71, 71, 71);
+		font-family: sans-serif;
+		padding: 2em;
+		border-radius: 25px;
+}
+	.ons {
+		border-color: orange;
+		text-align: center;
+		color: orange;
+		width: 140px;
+		height: 37px;
+		background-color: white;
+		padding-top: 1em;
+}
+	.field {
+		border-color: orange;
+		border-style: solid;
+}
+#tex {
+width: 300px;
+height: 50px;
+border-color: orange;
+}
+#te {
+width: 300px;
+height: 50px;
+border-color: purple;
+}
+#but {
+width: 180px;
+height: 35px;
+boder-color: green;
+text-align: center;
+border-style: solid;
+}
+#on {
+border-color: orange;
+text-align: center;
+color: orange;
+width: 160px;
+height: 35px;
+}
+#onn {
+border-color: orange;
+text-align: center;
+color: orange;
+width: max-content;
+height: max-content;
+}
+#fan {
+display: none;
+}
+.jug {
+display: flex;
+justify-content: space-between;
+}
+#ben {
+display: none;
+}
+.vad {
+background-color: wheat;
+}
+.war {
+display: flex;
+flex-direction: row;
+}
+#btn {
+border-color: orange;
+text-align: center;
+color: orange;
+width: 140px;
+height: 35px;
+}
+.head {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 92%;
+	height: max-content;
+}
+</style>
+<div class="container">
+<div class="almost">
+<div class="head">
+<h1>Flash Card</h1>
+<a href="{% url 'logout' %}" class="ons">Logout</a>
+</div>
+</div>
+<button onclick="go()" id="on">add question</button>
+<br><br>
+<div id="fan">
+<form method="post">
+{% csrf_token %}
+<fieldset class="field">
+<div class="jug">
+<h1>Question</h1>
+<button onclick="goat()" id="onn">back</button>
+</div>
+<input type="text" placeholder="your question" id="tex" name="question">
+<h1>Answer</h1>
+<input type="text" placeholder="your answer" id="te" name="answer">
+<br><br>
+<input type="submit" value="save" id="but">
+</fieldset>
+<br><br>
+</form>
+</div>
+<br>
+{% for card in card %}
+<fieldset class="vad">
+<h3>{{ card.question }}</h3>
+<div class="war">
+<p onclick="pat()" id="mal">show/</p>
+<p onclick="pad()" id="mal">hide answers</p>
+</div>
+<h4 id="ben">{{ card.answer }}</h4>
+
+<a href="{% url 'delete' card.id %}" id="her"><button id="btn">Delete</button></a>
+</fieldset>
+<br>
+{% endfor %}
+<script type="text/javascript">
+function go() {
+var a = document.getElementById('fan');
+a.style.display = "block";
+}
+function goat() {
+var b = document.getElementById('fan');
+b.style.display = "none";
+}
+function pat() {
+var c = document.getElementById('ben').style.display = "block";
+}
+function pad() {
+var d = document.getElementById('ben').style.display = "none";
+}
+</script>
+</div>
+{% endblock %}
